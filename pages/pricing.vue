@@ -43,10 +43,10 @@
       <!-- Personal Plan -->
       <div
         class="bg-white rounded-lg shadow-lg text-center px-6 py-8 md:mx-4 md:my-4 md:flex-1">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Personal Plan</h3>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Standard Plan</h3>
         <p class="text-gray-600 mb-4">Single user, 100 notes</p>
         <p class="text-3xl font-bold text-gray-900 mb-4">
-          $15<span class="text-gray-600 text-lg">/mo</span>
+          $4,99<span class="text-gray-600 text-lg">/mo</span>
         </p>
 
         <!-- logged in user gets a subscribe button-->
@@ -57,12 +57,12 @@
             activeMembership &&
             (activeMembership.access === ACCOUNT_ACCESS.OWNER ||
               activeMembership.access !== ACCOUNT_ACCESS.ADMIN) &&
-            activeMembership?.account.plan_name !== 'Individual Plan'
+            activeMembership?.account.plan_name !== 'Standard'
           ">
           <input
             type="hidden"
             name="price_id"
-            value="price_1MpOiwJfLn4RhYiLqfy6U8ZR" />
+            value="price_1R5rg9Ruv9CTAvejaDBbbZI0" />
           <input
             type="hidden"
             name="account_id"
@@ -85,10 +85,10 @@
       <!-- Team Plan -->
       <div
         class="bg-white rounded-lg shadow-lg text-center px-6 py-8 md:mx-4 md:my-4 md:flex-1">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Team Plan</h3>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional Plan</h3>
         <p class="text-gray-600 mb-4">10 users, 200 notes</p>
         <p class="text-3xl font-bold text-gray-900 mb-4">
-          $25<span class="text-gray-600 text-lg">/mo</span>
+          $19,99<span class="text-gray-600 text-lg">/mo</span>
         </p>
 
         <!-- logged in user gets a subscribe button-->
@@ -99,12 +99,12 @@
             activeMembership &&
             (activeMembership.access === ACCOUNT_ACCESS.OWNER ||
               activeMembership.access !== ACCOUNT_ACCESS.ADMIN) &&
-            activeMembership?.account.plan_name !== 'Team Plan'
+            activeMembership?.account.plan_name !== 'professional'
           ">
           <input
             type="hidden"
             name="price_id"
-            value="price_1MpOjtJfLn4RhYiLsjzAso90" />
+            value="price_1R6hS3Ruv9CTAvejq6fXT9Nz" />
           <input
             type="hidden"
             name="account_id"

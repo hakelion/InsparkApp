@@ -1,50 +1,105 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+
 async function main() {
-  const freeTrial = await prisma.plan.upsert({
-    where: { name: 'Free Trial' },
+  // Create default plans
+  const freePlan = await prisma.plan.upsert({
+    where: { name: 'Free' },
     update: {},
     create: {
-      name: 'Free Trial',
-      features: ['ADD_NOTES', 'EDIT_NOTES', 'VIEW_NOTES'],
-      max_notes: 10,
-      max_members: 1,
-      ai_gen_max_pm: 7
-    }
-  });
-  const individualPlan = await prisma.plan.upsert({
-    where: { name: 'Individual Plan' },
-    update: {},
-    create: {
-      name: 'Individual Plan',
-      features: ['ADD_NOTES', 'EDIT_NOTES', 'VIEW_NOTES', 'SPECIAL_FEATURE'],
-      max_notes: 100,
-      max_members: 1,
-      ai_gen_max_pm: 50,
-      stripe_product_id: 'prod_NQR7vwUulvIeqW'
-    }
-  });
-  const teamPlan = await prisma.plan.upsert({
-    where: { name: 'Team Plan' },
-    update: {},
-    create: {
-      name: 'Team Plan',
-      features: [
-        'ADD_NOTES',
-        'EDIT_NOTES',
-        'VIEW_NOTES',
-        'SPECIAL_FEATURE',
-        'SPECIAL_TEAM_FEATURE'
-      ],
-      max_notes: 200,
-      max_members: 10,
-      ai_gen_max_pm: 500,
-      stripe_product_id: 'prod_NQR8IkkdhqBwu2'
+      name: 'Free',
+      features: ['BASIC_EDITOR', 'WORD_COUNT', 'SAVE_DRAFTS', 'NEXUS', 'BRAINSTORMING', 'AI_SUGGESTIONS'],
+      max_credits_per_month: 0,
+      max_credits_per_day: 500
     }
   });
 
-  console.log({ freeTrial, individualPlan, teamPlan });
+  const standardPlan = await prisma.plan.upsert({
+    where: { name: 'Standard' },
+    update: {},
+    create: {
+      name: 'Standard',
+      features: ['BASIC_EDITOR', 'WORD_COUNT', 'SAVE_DRAFTS', 'ADVANCED_FORMATTING', 'EXPORT_OPTIONS', 'NEXUS', 'BRAINSTORMING', 'AI_SUGGESTIONS'],
+      max_credits_per_month: 70000,
+      max_credits_per_day: 500,
+      stripe_product_id: 'prod_RzrO7vFuzG7Igw'
+    }
+  });
+
+  const professionalPlan = await prisma.plan.upsert({
+    where: { name: 'Professional' },
+    update: {},
+    create: {
+      name: 'Professional',
+      features: [
+        'BASIC_EDITOR',
+        'WORD_COUNT',
+        'SAVE_DRAFTS',
+        'ADVANCED_FORMATTING',
+        'EXPORT_OPTIONS',
+        'NEXUS',
+        'BRAINSTORMING',
+        'AI_SUGGESTIONS',
+        'PRIORITY_SUPPORT'
+      ],
+      max_credits_per_month: 500000,
+      max_credits_per_day: 500,
+      stripe_product_id: 'prod_S0itMQD4vYdlLO'
+    }
+  });
+
+  // Create a demo account with the free plan
+  const demoAccount = await prisma.account.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      name: 'Demo Account',
+      plan_id: freePlan.id,
+      invite_code: 'DEMO2025'
+    }
+  });
+
+  // Create a demo user
+  const demoUser = await prisma.user.upsert({
+    where: { id: 1 },
+    update: {},
+    create: {
+      supabase_uid: 'demo-user-id',
+      email: 'demo@example.com',
+      display_name: 'Demo User'
+    }
+  });
+
+  // Create membership for demo user
+  const demoMembership = await prisma.membership.upsert({
+    where: { 
+      user_id_account_id: {
+        user_id: demoUser.id,
+        account_id: demoAccount.id
+      }
+    },
+    update: {},
+    create: {
+      user_id: demoUser.id,
+      account_id: demoAccount.id,
+      access: 'OWNER',
+      pending: false
+    }
+  });
+
+  // Create initial credit usage record for demo account
+  const demoCredit = await prisma.creditUsage.create({
+    data: {
+      account_id: demoAccount.id,
+      month: new Date().getMonth() + 1, // Current month (1-12)
+      year: new Date().getFullYear(),
+      day_usage: 0
+    }
+  });
+
+  console.log({ freePlan, standardPlan, professionalPlan, demoAccount, demoUser, demoMembership, demoCredit });
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
