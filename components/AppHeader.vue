@@ -25,6 +25,7 @@
           tabindex="0"
           class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
           <li v-if="user"><NuxtLink to="/dashboard">Dashboard</NuxtLink></li>
+          <li v-if="user"><NuxtLink to="/Brainstorm/Brainstorm">Brainstorming</NuxtLink></li>
           <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
           <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
         </ul>
@@ -36,6 +37,7 @@
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li v-if="user"><NuxtLink to="/dashboard">Dashboard</NuxtLink></li>
+        <li v-if="user"><NuxtLink to="/Brainstorm/Brainstorm">Brainstorming</NuxtLink></li>
         <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
         <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
         <li v-if="!user"><NuxtLink to="/signup">Start for free</NuxtLink></li>
