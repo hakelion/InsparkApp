@@ -1,5 +1,11 @@
 <script setup lang="ts">
   const user = useSupabaseUser();
+  const supabase = useSupabaseClient();
+  
+  async function handleLogout() {
+    await supabase.auth.signOut();
+    navigateTo('/');
+  }
 </script>
 
 <template>
@@ -28,6 +34,7 @@
           <li v-if="user"><NuxtLink to="/Brainstorm/Brainstorm">Brainstorming</NuxtLink></li>
           <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
           <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
+          <li v-if="user"><a @click="handleLogout" class="text-red-500">Logout</a></li>
         </ul>
       </div>
       <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
@@ -41,6 +48,7 @@
         <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
         <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
         <li v-if="!user"><NuxtLink to="/signup">Start for free</NuxtLink></li>
+        <li v-if="user"><a @click="handleLogout" class="text-red-500 hover:text-red-700">Logout</a></li>
         <li v-if="!user">
           <a
             title="github"
