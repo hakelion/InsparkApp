@@ -70,8 +70,8 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
     redirectOptions: {
-      login: '/signin',
-      callback: '/confirm'
+      login: '/auth/signin',
+      callback: '/auth/confirm'
     }
   }
 });
