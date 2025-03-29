@@ -15,5 +15,5 @@
   }
 </script>
 <template>
-  <a href="#" @click.prevent="signout()">Signout</a>
+  <a href="#" @click.prevent="signout()" class="dropdown-item">Signout</a>
 </template>

@@ -10,18 +10,21 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/supabase',
     '@pinia/nuxt',
-    '@nuxtjs/tailwindcss',
     'nuxt-icon'
   ],
   imports: {
     dirs: ['./stores']
   },
+  css: [
+    'bootstrap/dist/css/bootstrap.min.css',
+    'bootstrap-vue-3/dist/bootstrap-vue-3.css'
+  ],
   app: {
     head: {
       htmlAttrs: {
         lang: 'en'
       },
-      title: 'SupaNuxt SaaS',
+      title: 'InsparkApp',
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         {
@@ -42,6 +45,13 @@ export default defineNuxtConfig({
           href: '/apple-touch-icon.png'
         },
         { rel: 'manifest', href: '/site.webmanifest' }
+      ],
+      script: [
+        {
+          src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
+          integrity: 'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz',
+          crossorigin: 'anonymous'
+        }
       ]
     }
   },

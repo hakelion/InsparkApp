@@ -11,15 +11,16 @@
 
 <template>
   <template v-if="dbUser?.memberships && dbUser?.memberships.length > 1">
-    <li>Switch Account</li>
+    <li><div class="dropdown-header">Switch Account</div></li>
     <li v-for="membership in dbUser?.memberships">
       <a
         v-if="membership.account_id !== activeAccountId && !membership.pending"
         href="#"
-        @click="accountStore.changeActiveAccount(membership.account_id)">
+        @click="accountStore.changeActiveAccount(membership.account_id)"
+        class="dropdown-item">
         {{ membership.account.name }}
       </a>
-      <span v-if="membership.pending">
+      <span v-if="membership.pending" class="dropdown-item-text text-muted">
         {{ membership.account.name }} (pending)
       </span>
     </li>

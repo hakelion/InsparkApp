@@ -9,55 +9,49 @@
 </script>
 
 <template>
-  <div class="navbar bg-base-100">
-    <Notifications />
-    <div class="navbar-start">
-      <div class="dropdown">
-        <label tabindex="0" class="btn btn-ghost lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h8m-8 6h16" />
-          </svg>
-        </label>
-        <ul
-          tabindex="0"
-          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-          <li v-if="user"><NuxtLink to="/dashboard">Dashboard</NuxtLink></li>
-          <li v-if="user"><NuxtLink to="/Brainstorm/Brainstorm">Brainstorming</NuxtLink></li>
-          <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
-          <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
-          <li v-if="user"><a @click="handleLogout" class="text-red-500">Logout</a></li>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <Notifications />
+      
+      <NuxtLink to="/" class="navbar-brand">InkSpark</NuxtLink>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" v-if="user">
+            <NuxtLink to="/dashboard" class="nav-link">Dashboard</NuxtLink>
+          </li>
+          <li class="nav-item" v-if="user">
+            <NuxtLink to="/Brainstorm/Brainstorm" class="nav-link">Brainstorming</NuxtLink>
+          </li>
+          <li class="nav-item">
+            <NuxtLink to="/pricing" class="nav-link">Pricing</NuxtLink>
+          </li>
+          <li class="nav-item" v-if="!user">
+            <NuxtLink to="/signin" class="nav-link">Sign In</NuxtLink>
+          </li>
+          <li class="nav-item" v-if="!user">
+            <NuxtLink to="/signup" class="nav-link">Start for free</NuxtLink>
+          </li>
+          <li class="nav-item" v-if="!user">
+            <a href="https://github.com/JavascriptMick/supanuxt-saas" 
+               class="nav-link" title="github">
+              <Icon name="mdi:github" />
+            </a>
+          </li>
+          <li class="nav-item" v-if="user">
+            <a @click="handleLogout" class="nav-link text-danger" role="button">Logout</a>
+          </li>
         </ul>
+        
+        <div v-if="user">
+          <UserAccount :user="user" />
+        </div>
       </div>
-      <NuxtLink to="/" class="btn btn-ghost normal-case text-xl">
-        SupaNuxt SAAS
-      </NuxtLink>
     </div>
-    <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1">
-        <li v-if="user"><NuxtLink to="/dashboard">Dashboard</NuxtLink></li>
-        <li v-if="user"><NuxtLink to="/Brainstorm/Brainstorm">Brainstorming</NuxtLink></li>
-        <li><NuxtLink to="/pricing">Pricing</NuxtLink></li>
-        <li v-if="!user"><NuxtLink to="/signin">Sign In</NuxtLink></li>
-        <li v-if="!user"><NuxtLink to="/signup">Start for free</NuxtLink></li>
-        <li v-if="user"><a @click="handleLogout" class="text-red-500 hover:text-red-700">Logout</a></li>
-        <li v-if="!user">
-          <a
-            title="github"
-            href="https://github.com/JavascriptMick/supanuxt-saas">
-            <Icon name="mdi:github" />
-          </a>
-        </li>
-      </ul>
-    </div>
-    <UserAccount v-if="user" :user="user" />
-  </div>
+  </nav>
 </template>

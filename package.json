@@ -22,9 +22,7 @@
   "devDependencies": {
     "@nuxt/test-utils": "^3.11.0",
     "@nuxtjs/supabase": "^1.1.6",
-    "@nuxtjs/tailwindcss": "^6.11.4",
     "@prisma/client": "^5.22.0",
-    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.11.19",
     "nuxt": "^3.10.2",
     "nuxt-icon": "^0.6.8",
@@ -35,9 +33,11 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "@popperjs/core": "^2.11.8",
     "@trpc/client": "^10.45.1",
     "@trpc/server": "^10.45.1",
-    "daisyui": "^4.7.2",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-3": "^0.5.1",
     "generate-password-ts": "^1.6.5",
     "openai": "^4.28.0",
     "pinia": "^2.1.7",
